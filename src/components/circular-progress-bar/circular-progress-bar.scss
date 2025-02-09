@@ -1,6 +1,8 @@
 .circular-progress-bar {
-  border: 1px solid black;
-  padding: 20px;
+  padding: 26px;
+
+  border-radius: 24px;
+  background-color: var(--card-background-color);
 
   @media (orientation: landscape) {
     width: 568px;
@@ -36,5 +38,6 @@
     position: absolute;
     top: 0;
     left: 0;
+    font-weight: 400;
   }
 }

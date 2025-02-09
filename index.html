@@ -3,18 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Circular Progress Bar</title>
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
-    <circular-progress-bar class="progress">
-      <h2 slot="title" class="circular-progress-bar__title">Progress</h2>
-      <circular-progress-bar-loader slot="loader">
-      </circular-progress-bar-loader>
-      <circular-progress-bar-settings slot="settings" value="12">
-      </circular-progress-bar-settings>
-    </circular-progress-bar>
+    <main class="main">
+      <circular-progress-bar class="progress">
+        <h2 slot="title" class="circular-progress-bar__title">Progress</h2>
+        <circular-progress-bar-loader slot="loader">
+        </circular-progress-bar-loader>
+        <circular-progress-bar-settings
+          slot="settings"
+          value="42"
+          animate="true"
+        >
+        </circular-progress-bar-settings>
+      </circular-progress-bar>
+    </main>
   </body>
 </html>

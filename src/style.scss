@@ -1,5 +1,6 @@
 :root {
   --body-background-color: #eef3f6;
+  --card-background-color: rgb(230, 162, 164);
   --accent-color: #0c56d6;
   --base-accent-color: #dfe6f0;
 }
@@ -15,5 +16,15 @@ h6 {
 
 body {
   margin: 0;
+  height: 100vh;
   background-color: var(--body-background-color);
+
+  font-family: "Roboto", sans-serif;
+}
+
+.main {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
