@@ -32,6 +32,7 @@ class CircularProgressBarSettingsElement extends HTMLElement {
       });
 
       form.addEventListener("input", () => {
+        this.filterValueControl();
         const formValue = this.getFormValue(form);
 
         this.dispatchEvent(
@@ -87,6 +88,26 @@ class CircularProgressBarSettingsElement extends HTMLElement {
     }
 
     return formValue;
+  }
+
+  private filterValueControl(): void {
+    const shadow = this.shadowRoot;
+
+    if (shadow) {
+      const valueControl = shadow.querySelector(
+        'input[name="value"]'
+      ) as HTMLInputElement;
+
+      const value = +valueControl.value;
+
+      if (value < 0) {
+        valueControl.value = "0";
+      } else if (value > 100) {
+        valueControl.value = "100";
+      } else {
+        valueControl.value = value.toString();
+      }
+    }
   }
 }
 
