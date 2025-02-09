@@ -27,6 +27,8 @@ class CircularProgressBarSettingsElement extends HTMLElement {
         ${html}
       `;
 
+      this.filterValueControl();
+
       const form = shadow.querySelector(
         ".circular-progress-bar__settings"
       ) as HTMLFormElement;
@@ -102,14 +104,21 @@ class CircularProgressBarSettingsElement extends HTMLElement {
         'input[name="value"]'
       ) as HTMLInputElement;
 
-      const value = +valueControl.value;
+      const value = valueControl.value;
+      const numericalValue = +value;
 
-      if (value < 0) {
+      if (numericalValue < 0) {
         valueControl.value = "0";
-      } else if (value > 100) {
+      } else if (numericalValue > 100) {
         valueControl.value = "100";
       } else {
-        valueControl.value = value.toString();
+        // this regex checks that we've entered a valid integral or fractional number
+        // i.e. strings with multiple leading zeros like '004' or '00.23' won't pass
+        const regex = /(^0\.\d*$)|(^[1-9]\d*\.?\d*$)|^0$/;
+
+        if (!regex.test(value)) {
+          valueControl.value = numericalValue.toString();
+        }
       }
     }
   }
