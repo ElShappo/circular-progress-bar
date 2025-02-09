@@ -42,11 +42,23 @@ class CircularProgressBarElement extends HTMLElement {
 
         const loaderSlot = shadow.querySelector(
           'slot[name="loader"]'
-        ) as HTMLSlotElement;
+        ) as HTMLSlotElement | null;
 
-        console.log(newState);
+        if (!loaderSlot) {
+          console.error(
+            "Couldn't locate 'loader' slot within <circular-progress-bar> component. Make sure you've specified it."
+          );
+          return;
+        }
 
-        const loader = loaderSlot.assignedElements()[0];
+        const loader = loaderSlot.assignedElements()[0] as Element | undefined;
+
+        if (!loader) {
+          console.error(
+            "Couldn't locate any component within 'loader' slot. Make sure you've passed it."
+          );
+          return;
+        }
 
         for (const [key, value] of Object.entries(newState)) {
           const attributeName = SETTING_ATTRIBUTE_MAPPING.get(

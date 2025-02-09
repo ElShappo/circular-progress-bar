@@ -21,7 +21,7 @@ class CircularProgressBarLoaderElement extends HTMLElement {
     super();
   }
 
-  get template(): string {
+  get html(): string {
     return `
         <style>${styles}</style>
         ${svgElement} 
@@ -35,7 +35,7 @@ class CircularProgressBarLoaderElement extends HTMLElement {
   connectedCallback(): void {
     if (!this.isRendered) {
       const shadow = this.attachShadow({ mode: "open" });
-      shadow.innerHTML = this.template;
+      shadow.innerHTML = this.html;
 
       this.render();
       this.isRendered = true;
