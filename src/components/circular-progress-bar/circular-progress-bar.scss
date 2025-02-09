@@ -17,9 +17,11 @@
     height: 100%;
 
     position: relative;
+
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 90px;
 
     @media (orientation: landscape) {
       flex-direction: row;

@@ -5,6 +5,7 @@ import {
   CircularProgressBarForm,
   CircularProgressBarSetting,
 } from "./circular-progress-bar-settings.model";
+import styles from "./circular-progress-bar-settings.scss?inline";
 
 class CircularProgressBarSettingsElement extends HTMLElement {
   private isRendered: boolean = false;
@@ -20,8 +21,11 @@ class CircularProgressBarSettingsElement extends HTMLElement {
   connectedCallback(): void {
     if (!this.isRendered) {
       const shadow = this.attachShadow({ mode: "open" });
-      shadow.innerHTML = html;
-      // this.initializeForm();
+
+      shadow.innerHTML = `
+        <style>${styles}</style>
+        ${html}
+      `;
 
       const form = shadow.querySelector(
         ".circular-progress-bar__settings"
