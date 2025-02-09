@@ -1,6 +1,11 @@
+export type CircularProgressBarState = Record<
+  CircularProgressBarProperty,
+  number | boolean
+>;
+
 export type CircularProgressBarAttribute =
   | "value"
   | "is-animated"
   | "is-hidden";
 
-export type CircularProgressBarValue = "value" | "isAnimated" | "isHidden";
+export type CircularProgressBarProperty = "value" | "isAnimated" | "isHidden";

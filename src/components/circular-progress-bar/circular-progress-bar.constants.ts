@@ -1,21 +1,31 @@
+import { CircularProgressBarSetting } from "./circular-progress-bar-settings/circular-progress-bar-settings.model";
 import "./circular-progress-bar.model";
 import {
   CircularProgressBarAttribute,
-  CircularProgressBarValue,
+  CircularProgressBarProperty,
+  CircularProgressBarState,
 } from "./circular-progress-bar.model";
 
-export const DEFAULT_STATE: Record<CircularProgressBarValue, number | boolean> =
-  {
-    value: 0,
-    isAnimated: false,
-    isHidden: false,
-  };
+export const DEFAULT_STATE: CircularProgressBarState = {
+  value: 0,
+  isAnimated: false,
+  isHidden: false,
+};
 
 export const ATTRIBUTE_PROPERTY_MAPPING = new Map<
   CircularProgressBarAttribute,
-  CircularProgressBarValue
+  CircularProgressBarProperty
 >([
   ["value", "value"],
   ["is-animated", "isAnimated"],
   ["is-hidden", "isHidden"],
+]);
+
+export const SETTING_ATTRIBUTE_MAPPING = new Map<
+  CircularProgressBarSetting,
+  CircularProgressBarAttribute
+>([
+  ["value", "value"],
+  ["animate", "is-animated"],
+  ["hide", "is-hidden"],
 ]);

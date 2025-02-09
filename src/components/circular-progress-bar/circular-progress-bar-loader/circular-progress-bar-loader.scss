@@ -1,0 +1,35 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.circular-progress-bar-loader {
+  transform: rotate(-90deg);
+  transition: opacity 0.4s linear;
+
+  &_hidden {
+    opacity: 0;
+  }
+
+  &__arc {
+    stroke: var(--accent-color);
+    stroke-width: 10px;
+
+    animation: rotate 2s linear infinite;
+    animation-play-state: paused;
+    transform-origin: center;
+
+    &_animated {
+      animation-play-state: running;
+    }
+  }
+
+  &__background {
+    stroke: var(--base-accent-color);
+    stroke-width: 10px;
+  }
+}

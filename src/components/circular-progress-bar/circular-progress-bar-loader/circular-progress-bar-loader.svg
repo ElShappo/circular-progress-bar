@@ -1,0 +1,4 @@
+<svg class="circular-progress-bar-loader" width="120" height="120">
+  <circle class="circular-progress-bar-loader__background" cx="60" cy="60" r="55" fill="transparent" />
+  <circle class="circular-progress-bar-loader__arc" cx="60" cy="60" r="55" fill="transparent" />
+</svg>

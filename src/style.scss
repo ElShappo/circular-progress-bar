@@ -1,0 +1,19 @@
+:root {
+  --body-background-color: #eef3f6;
+  --accent-color: #0c56d6;
+  --base-accent-color: #dfe6f0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  background-color: var(--body-background-color);
+}
