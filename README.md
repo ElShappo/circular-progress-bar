@@ -16,7 +16,10 @@ A Web Component that can be used to track down progress of any desired task. It'
         In order to toggle animation (i.e. rotation of a progress bar) there's a corresponding <code>animate</code> control;
     </li>
     <li>
-        Like in case with <code>animate</code> control, there is also a <code>hide</code> control, which, as the name suggests, can hide a progress bar completely.
+        Like in case with <code>animate</code> control, there is also a <code>hide</code> control, which, as the name suggests, can hide a progress bar completely;
+    </li>
+    <li>
+        It's also possible to customize background color of a <code>circular-progress-bar</code>: to do that simply pass an attribute <code>color</code> with a desired value (default value is <code>white</code>).
     </li>
 </ul>
 
