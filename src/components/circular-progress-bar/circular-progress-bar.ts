@@ -6,13 +6,20 @@ import {
   CircularProgressBarForm,
   CircularProgressBarSetting,
 } from "./circular-progress-bar-settings/circular-progress-bar-settings.model";
-import { SETTING_ATTRIBUTE_MAPPING } from "./circular-progress-bar.constants";
+import {
+  DEFAULT_COLOR,
+  SETTING_ATTRIBUTE_MAPPING,
+} from "./circular-progress-bar.constants";
 
 class CircularProgressBarElement extends HTMLElement {
   private isRendered: boolean = false;
+  private settingsEventHandler = this.handleSettingsEvent.bind(this);
 
   constructor() {
     super();
+
+    const shadow = this.attachShadow({ mode: "open" });
+    shadow.innerHTML = this.html;
   }
 
   get html(): string {
@@ -28,45 +35,78 @@ class CircularProgressBarElement extends HTMLElement {
     `;
   }
 
+  static get observedAttributes(): string[] {
+    return ["color"];
+  }
+
   connectedCallback(): void {
     if (!this.isRendered) {
-      const shadow = this.attachShadow({ mode: "open" });
-      shadow.innerHTML = this.html;
+      const shadow = this.shadowRoot!;
+
+      shadow.addEventListener("settings", this.settingsEventHandler);
       this.isRendered = true;
+    }
+  }
 
-      shadow.addEventListener("settings", (event: Event) => {
-        const settingsEvent = event as CustomEvent;
+  disconnectedCallback(): void {
+    const shadow = this.shadowRoot!;
+    shadow.removeEventListener("settings", this.settingsEventHandler);
+  }
 
-        const newState = settingsEvent.detail
-          .value as Partial<CircularProgressBarForm>;
+  attributeChangedCallback(
+    _attributeName: CircularProgressBarSetting,
+    _oldValue: string | null,
+    newValue: string
+  ): void {
+    const shadow = this.shadowRoot!;
 
-        const loaderSlot = shadow.querySelector(
-          'slot[name="loader"]'
-        ) as HTMLSlotElement | null;
+    const card = shadow.querySelector(
+      ".circular-progress-bar"
+    ) as HTMLElement | null;
 
-        if (!loaderSlot) {
-          console.error(
-            "Couldn't locate 'loader' slot within <circular-progress-bar> component. Make sure you've specified it."
-          );
-          return;
-        }
+    if (!card) {
+      console.error(
+        "Couldn't locate a card component within template. Make sure you've passed it."
+      );
+      return;
+    }
 
-        const loader = loaderSlot.assignedElements()[0] as Element | undefined;
+    card.style.backgroundColor = newValue || DEFAULT_COLOR;
+  }
 
-        if (!loader) {
-          console.error(
-            "Couldn't locate any component within 'loader' slot. Make sure you've passed it."
-          );
-          return;
-        }
+  private handleSettingsEvent(event: Event): void {
+    const settingsEvent = event as CustomEvent;
 
-        for (const [key, value] of Object.entries(newState)) {
-          const attributeName = SETTING_ATTRIBUTE_MAPPING.get(
-            key as CircularProgressBarSetting
-          )!;
-          loader.setAttribute(attributeName, value);
-        }
-      });
+    const newState = settingsEvent.detail
+      .value as Partial<CircularProgressBarForm>;
+
+    const shadow = this.shadowRoot!;
+
+    const loaderSlot = shadow.querySelector(
+      'slot[name="loader"]'
+    ) as HTMLSlotElement | null;
+
+    if (!loaderSlot) {
+      console.error(
+        "Couldn't locate 'loader' slot within <circular-progress-bar> component. Make sure you've specified it."
+      );
+      return;
+    }
+
+    const loader = loaderSlot.assignedElements()[0] as Element | undefined;
+
+    if (!loader) {
+      console.error(
+        "Couldn't locate any component within 'loader' slot. Make sure you've passed it."
+      );
+      return;
+    }
+
+    for (const [key, value] of Object.entries(newState)) {
+      const attributeName = SETTING_ATTRIBUTE_MAPPING.get(
+        key as CircularProgressBarSetting
+      )!;
+      loader.setAttribute(attributeName, value);
     }
   }
 }

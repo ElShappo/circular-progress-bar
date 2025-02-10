@@ -29,3 +29,5 @@ export const SETTING_ATTRIBUTE_MAPPING = new Map<
   ["animate", "is-animated"],
   ["hide", "is-hidden"],
 ]);
+
+export const DEFAULT_COLOR = "white";
